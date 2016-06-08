@@ -1,0 +1,6 @@
+{
+    "port": 8080,
+    "shutdownTimeout": 1000,
+    "logLevel": "info",
+    "prefix": "/image-proxy/v1"
+}
