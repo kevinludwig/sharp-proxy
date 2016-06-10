@@ -2,5 +2,12 @@
     "port": 8080,
     "shutdownTimeout": 1000,
     "logLevel": "info",
-    "prefix": "/image-proxy/v1"
+    "prefix": "/image-proxy/v1",
+    "cacheRoot": "/tmp",
+    "imageRoot": "images/",
+    "watermark": {
+        "fontName": "Helvetica",
+        "fontSize": 18,
+        "fillColor": "white"
+    }
 }

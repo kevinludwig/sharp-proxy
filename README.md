@@ -29,8 +29,6 @@ npm start
 
 ### TODO
 
-* fix the composite function -- it wants either the image or the watermark image to be on disk files
-* cache to filesystem when resizing. Naming convention so everything doesnt end up in one directory
 * /thumbnail endpoint should produce a small low res thumbnail as PNG 
 * /preview should produde a larger image with watermark as PNG
 * /download should provide the original image (original format, .tiff, .png, .jpeg, ...

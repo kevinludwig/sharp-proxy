@@ -1,4 +1,10 @@
-import {identify, resize, watermark, composite} from '../services/gm'
+import {
+    identify,
+    resize,
+    watermark,
+    composite
+} from '../services/gm'
+import * as cache from '../services/cache'
 
 export default function*() {
     let self = this;
@@ -15,10 +21,15 @@ export default function*() {
     let buffer = yield resize(this.params.name, w, h);
 
     if (this.query.text) {
-        let wbuffer = yield watermark(this.query.text, w, h);
-
+        let watermarkFile;
+        let exists = yield cache.exists(this.query.text, w, h);
+        if (exists) {
+            watermarkFile = cache.fileName(this.query.text, w, h);
+        } else {
+            watermarkFile = yield watermark(this.query.text, w, h);
+        }
         this.type = 'image/png';
-        this.body = yield composite(buffer, wbuffer);
+        this.body = yield composite(buffer, watermarkFile);
     } else {
         this.type = 'image/png';
         this.body = buffer;
