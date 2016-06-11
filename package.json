@@ -14,7 +14,7 @@
   "dependencies": { 
     "koa": "^1.2.0",
     "koa-router": "^5.4.0",
-    "koa-bodyparser": "^2.1.0",
+    "koa-body": "^1.4.0",
     "koa-response-time": "^1.0.2",
     "koa-helmet": "^1.0.0",
     "koa-cors": "^0.0.16",

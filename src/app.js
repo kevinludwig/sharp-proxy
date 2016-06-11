@@ -1,5 +1,5 @@
 import Koa from 'koa'
-import bodyParser from 'koa-bodyparser'
+import body from 'koa-body'
 import helmet from 'koa-helmet'
 import toobusy from 'koa-toobusy'
 import responseTime from 'koa-response-time'
@@ -23,7 +23,9 @@ app.use(responseTime());
 app.use(accesslog());
 app.use(toobusy());
 app.use(helmet());
-app.use(bodyParser());
+app.use(body({
+    multipart: true
+}));
 app.use(cors());
 app.use(ping(config.prefix + '/ping'));
 
