@@ -16,8 +16,12 @@ import routes from './routes'
 let app = Koa();
 
 app.use(errorHandler(function(e) {
-    log.error(e);
-    this.body = e.message;
+    if (e.status) {
+        this.body = e.message;
+    } else {
+        log.error(e);
+    }
+    
     this.status = e.status || 500;
 }));
 
