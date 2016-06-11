@@ -8,6 +8,7 @@ import gracefulShutdown from 'http-graceful-shutdown'
 import ping from 'koa-ping'
 import errorHandler from 'koa-err'
 import accesslog from 'koa-accesslog'
+import staticfiles from 'koa-static'
 import config from 'config'
 import log from './logger'
 import routes from './routes'
@@ -16,13 +17,15 @@ let app = Koa();
 
 app.use(errorHandler(function(e) {
     log.error(e);
-    this.status = 500;
+    this.body = e.message;
+    this.status = e.status || 500;
 }));
 
 app.use(responseTime());
 app.use(accesslog());
 app.use(toobusy());
 app.use(helmet());
+app.use(staticfiles('public'));
 app.use(body({
     multipart: true
 }));

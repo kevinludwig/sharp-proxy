@@ -7,7 +7,7 @@ var gulp = require('gulp'),
     open = require('gulp-open'),
     del = require('del');
 
-gulp.task('default', ['clean', 'beautify', 'eslint', 'babel:src', 'babel:test', 'cover', 'mocha']);
+gulp.task('default', ['clean', 'beautify', 'eslint', 'copy:public', 'babel:src', 'babel:test', 'cover', 'mocha']);
 gulp.task('build', ['clean', 'eslint', 'babel:src']);
 
 gulp.task('coverage', () => {
@@ -30,6 +30,11 @@ gulp.task('eslint', ['beautify'], () => {
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
+});
+
+gulp.task('copy:public', ['eslint'], () => {
+    return gulp.src('./public**/*')
+        .pipe('build/public');
 });
 
 const plugins = [

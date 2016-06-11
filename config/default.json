@@ -4,7 +4,7 @@
     "logLevel": "info",
     "prefix": "/image-proxy/v1",
     "cacheRoot": "/tmp",
-    "imageRoot": "images/",
+    "imageRoot": "/Users/kevinludwig/devel/image-proxy/images/",
     "watermark": {
         "fontName": "Helvetica",
         "fontSize": 18,
