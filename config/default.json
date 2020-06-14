@@ -1,8 +1,6 @@
 {
     "port": 8080,
-    "shutdownTimeout": 1000,
     "logLevel": "info",
-    "prefix": "/image-proxy/v1",
     "cacheRoot": "/tmp",
     "imageRoot": "/Users/kevinludwig/devel/image-proxy/images/",
     "watermark": {

@@ -1,13 +1,10 @@
-import Router from 'koa-router'
-import thumbnail from './controllers/thumbnail'
-import upload from './controllers/upload'
-import config from 'config'
+const Router = require('koa-router'),
+    thumbnail = require('./controllers/thumbnail'),
+    upload = require('./controllers/upload');
 
-let router = new Router({
-    prefix: config.prefix
-});
+const router = new Router();
 
 router.get('/thumbnail/:name', thumbnail);
 router.post('/upload', upload);
 
-export default router.routes();
+module.exports = router.routes();

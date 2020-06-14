@@ -1,37 +1,31 @@
-import {
-    identify,
-    resize,
-    watermark,
-    composite
-} from '../services/gm'
-import * as cache from '../services/cache'
+const {identify,resize,watermark,composite} = require('../services/gm'),
+    cache = require('../services/cache');
 
-export default function*() {
-    let self = this;
-    let metadata = yield identify(this.params.name);
-    let {
+module.exports = async (ctx) => {
+    const metadata = await identify(ctx.params.name);
+    const {
         size: {
             width,
             height
         }
     } = metadata;
 
-    let [w, h] = this.query.size ? this.query.size.split('x') : [width, height];
+    const [w, h] = ctx.query.size ? ctx.query.size.split('x') : [width, height];
 
-    let buffer = yield resize(this.params.name, w, h);
+    const buffer = await resize(ctx.params.name, w, h);
 
-    if (this.query.text) {
+    if (ctx.query.text) {
         let watermarkFile;
-        let exists = yield cache.exists(this.query.text, w, h);
+        const exists = await cache.exists(ctx.query.text, w, h);
         if (exists) {
-            watermarkFile = cache.fileName(this.query.text, w, h);
+            watermarkFile = cache.fileName(ctx.query.text, w, h);
         } else {
-            watermarkFile = yield watermark(this.query.text, w, h);
+            watermarkFile = await watermark(ctx.query.text, w, h);
         }
-        this.type = 'image/png';
-        this.body = yield composite(buffer, watermarkFile);
+        ctx.type = 'image/png';
+        ctx.body = await composite(buffer, watermarkFile);
     } else {
-        this.type = 'image/png';
-        this.body = buffer;
+        ctx.type = 'image/png';
+        ctx.body = buffer;
     }
 }

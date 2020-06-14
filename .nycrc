@@ -1,0 +1,20 @@
+{
+    "reporter": [
+        "lcov",
+        "text"
+    ],
+    "include": [
+        "src",
+        "test"
+    ],
+    "exclude": [
+        "src/boot.js"
+    ],
+    "all": true,
+    "instrument": true,
+    "check-coverage": true,
+    "lines": 99,
+    "statements": 99,
+    "functions": 99,
+    "branches": 80
+}

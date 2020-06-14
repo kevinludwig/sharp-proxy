@@ -1,54 +1,28 @@
-import Koa from 'koa'
-import body from 'koa-body'
-import helmet from 'koa-helmet'
-import toobusy from 'koa-toobusy'
-import responseTime from 'koa-response-time'
-import cors from 'koa-cors'
-import gracefulShutdown from 'http-graceful-shutdown'
-import ping from 'koa-ping'
-import errorHandler from 'koa-err'
-import accesslog from 'koa-accesslog'
-import staticfiles from 'koa-static'
-import config from 'config'
-import log from './logger'
-import routes from './routes'
+const Koa = require('koa'),
+    bodyParser = require('koa-bodyparser'),
+    cors = require('@koa/cors'),
+    config = require('config'),
+    log = require('./logger'),
+    routes = require('./routes'),
+    app = new Koa();
 
-let app = Koa();
-
-app.use(errorHandler(function(e) {
-    if (e.status) {
-        this.body = e.message;
-    } else {
-        log.error(e);
+app.use(async(ctx, next) => {
+    try {
+        await next();
+    } catch (ex) {
+        log.error(ex.message, ex.stack);
+        ctx.status = 500;
     }
-    
-    this.status = e.status || 500;
-}));
+});
 
-app.use(responseTime());
-app.use(accesslog());
-app.use(toobusy());
-app.use(helmet());
-app.use(staticfiles('public'));
-app.use(body({
-    multipart: true
+app.use(bodyParser());
+app.use(cors({
+    credentials: true
 }));
-app.use(cors());
-app.use(ping(config.prefix + '/ping'));
-
 app.use(routes);
 
-function noop() {}
-
-export default (ready = noop) => {
-    let server = app.listen(config.port, () => {
-        log.info('listening on ' + config.port);
-        ready();
+module.exports = () => {
+    return new Promise((resolve) => {
+        const server = app.listen(config.port, () => resolve(server));
     });
-
-    gracefulShutdown(server, {
-        timeout: config.shutdownTimeout
-    });
-
-    return server;
 }

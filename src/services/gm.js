@@ -1,6 +1,6 @@
-import config from 'config'
-import gm from 'gm'
-import * as cache from './cache'
+const config = require('config'),
+    gm = require('gm'),
+    cache = require('./cache');
 
 function identify(name) {
     return new Promise((resolve, reject) => {
@@ -30,7 +30,7 @@ function resize(name, w, h) {
 
 function watermark(text, w, h) {
     return new Promise((resolve, reject) => {
-        let out = cache.fileName(text, w, h);
+        const out = cache.fileName(text, w, h);
         gm(w, h)
             .in('-background', 'transparent')
             .in('-fill', config.watermark.fillColor)
@@ -64,9 +64,9 @@ function composite(image, watermark) {
     });
 }
 
-export {
+module.exports = {
     identify,
     resize,
     watermark,
     composite
-}
+};
