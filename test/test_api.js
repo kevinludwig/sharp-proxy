@@ -15,8 +15,8 @@ describe('image serving', () => {
         server.close();
     });
 
-    it('should return 200 OK', () => {
-        request(server)
+    it('should return 200 OK', async () => {
+        await request(server)
             .get('/info/1')
             .expect(200);
     });
