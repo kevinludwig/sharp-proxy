@@ -1,10 +1,10 @@
 const Router = require('koa-router'),
-    thumbnail = require('./controllers/thumbnail'),
+    image  = require('./controllers/image'),
     upload = require('./controllers/upload');
 
 const router = new Router();
 
-router.get('/thumbnail/:name', thumbnail);
+router.get('/*', image);
 router.post('/upload', upload);
 
 module.exports = router.routes();
