@@ -1,5 +1,5 @@
 const Koa = require('koa'),
-    bodyParser = require('koa-bodyparser'),
+    koaBody = require('koa-body'),
     cors = require('@koa/cors'),
     config = require('config'),
     log = require('./logger'),
@@ -15,7 +15,7 @@ app.use(async(ctx, next) => {
     }
 });
 
-app.use(bodyParser());
+app.use(koaBody({multipart: true}));
 app.use(cors({
     credentials: true
 }));

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "image upload and serving with resize and file format conversion with sharp.js",
   "scripts": {
-    "start": "node build/boot.js",
+    "start": "node src/boot.js",
     "pretest": "eslint --fix",
     "test": "nyc mocha --bail --exit"
   },
@@ -13,9 +13,10 @@
   ],
   "dependencies": {
     "@koa/cors": "^3.1.0",
+    "aws-sdk": "^2.696.0",
     "config": "^3.3.1",
     "koa": "^2.12.1",
-    "koa-bodyparser": "^4.3.0",
+    "koa-body": "^4.2.0",
     "koa-router": "^9.0.1",
     "sharp": "^0.25.4",
     "superagent": "^5.2.2",

@@ -1,11 +1,9 @@
 {
     "port": 8080,
     "logLevel": "info",
-    "cacheRoot": "/tmp",
-    "imageRoot": "/Users/kevinludwig/devel/image-proxy/images/",
-    "watermark": {
-        "fontName": "Helvetica",
-        "fontSize": 18,
-        "fillColor": "white"
+    "cacheRoot": "/render-cache",
+    "s3": {
+        "apiVersion": "2006-03-01",
+        "endpoint": "http://localhost:9872"
     }
 }

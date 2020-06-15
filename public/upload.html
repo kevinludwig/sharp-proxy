@@ -10,10 +10,9 @@
     <body>
         <h3>Image Uploader</h3>
         <hr>
-        <form action="/image-proxy/v1/upload" enctype="multipart/form-data" method="post">
-            <input type="text" name="contentid" placeholder="Content id"><br>
-            <input type="text" name="title" placeholder="Title of image"><br>
-            <input type="file" name="uploads" multiple="multiple"><br>
+        <form action="http://localhost:8080/upload" enctype="multipart/form-data" method="post">
+            <input type="text" name="path" placeholder="Path on s3"><br>
+            <input type="file" name="uploads" ><br>
             <button type="submit">Upload</button>
         </form>
     </body>

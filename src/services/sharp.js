@@ -4,7 +4,7 @@ const config = require('config'),
 
 const metadata = (name) => sharp(config.imageRoot + name).metadata();
 
-const resize = (name, w, h) => {
+const resize = (name, width, height) => {
     return sharp(config.imageRoot + name)
         .resize({
             width,

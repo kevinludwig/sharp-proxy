@@ -1,17 +1,9 @@
-const fs = require('fs'),
-    config = require('config');
+const crypto = require('crypto');
 
-const fileName = (text, w, h) => {
-    return `${config.cacheRoot}/${text.replace(' ', '_')}_${w}x${h}.png`;
-}
-
-const exists = async (text, w, h) => {
-    return new Promise((resolve, reject) => {
-        fs.exists(fileName(text, w, h), resolve);
-    });
+const key = (...args) => {
+    return crypto.createHash('md5').update(args.join(':')).digest('hex');
 }
 
 module.exports = {
-    fileName,
-    exists
+    key
 }
