@@ -10,7 +10,7 @@ app.use(async(ctx, next) => {
     try {
         await next();
     } catch (ex) {
-        log.error(ex.message, ex.stack);
+        log.error(ex.message, ex);
         ctx.status = 500;
     }
 });

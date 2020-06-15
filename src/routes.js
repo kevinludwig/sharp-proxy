@@ -4,7 +4,7 @@ const Router = require('koa-router'),
 
 const router = new Router();
 
-router.get('/*', image);
 router.post('/upload', upload);
+router.get('*', image);
 
 module.exports = router.routes();
