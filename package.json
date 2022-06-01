@@ -18,7 +18,7 @@
     "koa": "^2.12.1",
     "koa-body": "^4.2.0",
     "koa-router": "^7.4.0",
-    "sharp": "^0.25.4",
+    "sharp": "^0.30.5",
     "superagent": "^5.2.2",
     "winston": "^3.2.1"
   },
